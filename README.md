@@ -11,6 +11,16 @@ Modal-Projects is a JavaScript library designed to simplify the process of creat
 *   **Support for multiple modal types**: Modal-Projects supports a variety of modal types, including alert, confirm, prompt, and custom modals.
 *   **Accessibility features**: Modal-Projects includes built-in accessibility features, such as keyboard navigation and screen reader support.
 
+## Comparison with Other Modal Libraries
+----------------------------------------
+
+| Feature | Modal-Projects | Other Library 1 | Other Library 2 |
+| --- | --- | --- | --- |
+| Ease of Use | Simple and straightforward API | Complex API | Steep learning curve |
+| Customizability | Highly customizable | Limited customization options | Fully customizable |
+| Modal Types | Supports multiple modal types | Limited to alert and confirm | Supports custom modals |
+| Accessibility | Built-in accessibility features | Limited accessibility features | No accessibility features |
+
 ## Installation
 ------------
 
@@ -58,6 +68,37 @@ const modal = new Modal({
 modal.show();
 ```
 
+### Creating a Modal with a Button
+
+You can also create a modal with a button:
+
+```javascript
+import Modal from 'modal-projects';
+
+// Create a new modal instance with a button
+const modal = new Modal({
+  title: 'My Modal',
+  content: 'This is my modal content',
+  buttons: [
+    {
+      text: 'OK',
+      onClick: () => {
+        console.log('OK button clicked');
+      },
+    },
+    {
+      text: 'Cancel',
+      onClick: () => {
+        console.log('Cancel button clicked');
+      },
+    },
+  ],
+});
+
+// Show the modal
+modal.show();
+```
+
 ## Advanced Usage
 ----------------
 
@@ -70,242 +111,138 @@ You can create a custom modal by passing a custom template to the `Modal` constr
 ```javascript
 import Modal from 'modal-projects';
 
-// Create a new modal instance with a custom template
+// Create a new custom modal instance
 const modal = new Modal({
-  title: 'My Modal',
-  content: `
-    <div>
-      <h2>This is my custom modal content</h2>
-      <button id="close-btn">Close</button>
-    </div>
-  `,
-  onClose: () => {
-    console.log('Modal closed');
-  },
+  title: 'My Custom Modal',
+  content: '<div>This is my custom modal content</div>',
+  template: '<div class="custom-modal">{{content}}</div>',
 });
 
 // Show the modal
 modal.show();
-
-// Get the close button element
-const closeButton = modal.getContent().querySelector('#close-btn');
-
-// Add an event listener to the close button
-closeButton.addEventListener('click', () => {
-  modal.close();
-});
 ```
 
-### Creating a Modal with a Form
+### Customizing Modal Styles
 
-You can create a modal with a form by passing a form template to the `Modal` constructor:
+You can customize the styles of your modals by using CSS classes:
 
 ```javascript
 import Modal from 'modal-projects';
 
-// Create a new modal instance with a form template
-const modal = new Modal({
-  title: 'My Modal',
-  content: `
-    <form id="my-form">
-      <input type="text" id="name" placeholder="Enter your name">
-      <button id="submit-btn">Submit</button>
-    </form>
-  `,
-  onClose: () => {
-    console.log('Modal closed');
-  },
-});
-
-// Show the modal
-modal.show();
-
-// Get the form element
-const form = modal.getContent().querySelector('#my-form');
-
-// Add an event listener to the form submit event
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const name = form.querySelector('#name').value;
-  console.log(`Hello, ${name}!`);
-  modal.close();
-});
-```
-
-## Comparison with Other Libraries
-----------------------------------
-
-| Feature | Modal-Projects | Other Library 1 | Other Library 2 |
-| --- | --- | --- | --- |
-| **Easy to use** | Yes | No | Yes |
-| **Highly customizable** | Yes | Yes | No |
-| **Support for multiple modal types** | Yes | No | Yes |
-| **Accessibility features** | Yes | No | Yes |
-| **Size** | 10KB | 50KB | 20KB |
-| **Community support** | Active | Limited | Active |
-
-## Mermaid Diagram
-------------------
-
-Here's a Mermaid diagram that illustrates the Modal-Projects architecture:
-```mermaid
-graph LR
-    A[Modal-Projects] --> B[Modal Instance]
-    B --> C[Modal Content]
-    C --> D[Modal Template]
-    D --> E[Custom Template]
-    E --> F[Form Template]
-    F --> G[Form Submit Event]
-    G --> H[Modal Close Event]
-    H --> I[Modal Closed Callback]
-    I --> J[Custom Callback]
-```
-
-## API Documentation
----------------------
-
-### Modal
-
-#### constructor(options)
-
-*   `options`: An object with the following properties:
-    *   `title`: The title of the modal.
-    *   `content`: The content of the modal.
-    *   `onClose`: A callback function that will be executed when the modal is closed.
-
-#### show()
-
-*   Shows the modal.
-
-#### close()
-
-*   Closes the modal.
-
-#### getContent()
-
-*   Returns the content element of the modal.
-
-#### setTitle(title)
-
-*   Sets the title of the modal.
-
-#### setContent(content)
-
-*   Sets the content of the modal.
-
-### Modal Instance
-
-#### constructor(options)
-
-*   `options`: An object with the following properties:
-    *   `title`: The title of the modal.
-    *   `content`: The content of the modal.
-    *   `onClose`: A callback function that will be executed when the modal is closed.
-
-#### show()
-
-*   Shows the modal.
-
-#### close()
-
-*   Closes the modal.
-
-#### getContent()
-
-*   Returns the content element of the modal.
-
-#### setTitle(title)
-
-*   Sets the title of the modal.
-
-#### setContent(content)
-
-*   Sets the content of the modal.
-
-## Examples
-------------
-
-### Example 1: Creating a Simple Modal
-
-```javascript
-import Modal from 'modal-projects';
-
-// Create a new modal instance
+// Create a new modal instance with custom styles
 const modal = new Modal({
   title: 'My Modal',
   content: 'This is my modal content',
+  className: 'my-modal',
 });
 
 // Show the modal
 modal.show();
 ```
 
-### Example 2: Creating a Modal with a Form
-
-```javascript
-import Modal from 'modal-projects';
-
-// Create a new modal instance with a form template
-const modal = new Modal({
-  title: 'My Modal',
-  content: `
-    <form id="my-form">
-      <input type="text" id="name" placeholder="Enter your name">
-      <button id="submit-btn">Submit</button>
-    </form>
-  `,
-  onClose: () => {
-    console.log('Modal closed');
-  },
-});
-
-// Show the modal
-modal.show();
-
-// Get the form element
-const form = modal.getContent().querySelector('#my-form');
-
-// Add an event listener to the form submit event
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const name = form.querySelector('#name').value;
-  console.log(`Hello, ${name}!`);
-  modal.close();
-});
+```css
+.my-modal {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
 ```
 
-### Example 3: Creating a Custom Modal
+### Integrating with Other Libraries
+
+Modal-Projects can be integrated with other libraries and frameworks, such as React and Angular:
 
 ```javascript
+import React from 'react';
 import Modal from 'modal-projects';
 
-// Create a new modal instance with a custom template
-const modal = new Modal({
-  title: 'My Modal',
-  content: `
+// Create a new React component that uses Modal-Projects
+const MyComponent = () => {
+  const [showModal, setShowModal] = React.useState(false);
+
+  const handleButtonClick = () => {
+    setShowModal(true);
+  };
+
+  return (
     <div>
-      <h2>This is my custom modal content</h2>
-      <button id="close-btn">Close</button>
+      <button onClick={handleButtonClick}>Show Modal</button>
+      {showModal && (
+        <Modal
+          title="My Modal"
+          content="This is my modal content"
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </div>
-  `,
-  onClose: () => {
-    console.log('Modal closed');
+  );
+};
+```
+
+## Architecture
+--------------
+
+The following Mermaid diagram illustrates the architecture of Modal-Projects:
+```mermaid
+classDiagram
+  class Modal {
+    - title: string
+    - content: string
+    - template: string
+    + show()
+    + hide()
+    + onClose()
+  }
+  class ModalManager {
+    + createModal(title: string, content: string, template: string)
+    + showModal(modal: Modal)
+    + hideModal(modal: Modal)
+  }
+  ModalManager ..> Modal : uses
+```
+
+## Accessibility
+--------------
+
+Modal-Projects includes built-in accessibility features, such as keyboard navigation and screen reader support. The following code example demonstrates how to use these features:
+
+```javascript
+import Modal from 'modal-projects';
+
+// Create a new modal instance with accessibility features
+const modal = new Modal({
+  title: 'My Modal',
+  content: 'This is my modal content',
+  accessibility: {
+    keyboardNavigation: true,
+    screenReaderSupport: true,
   },
 });
 
 // Show the modal
 modal.show();
-
-// Get the close button element
-const closeButton = modal.getContent().querySelector('#close-btn');
-
-// Add an event listener to the close button
-closeButton.addEventListener('click', () => {
-  modal.close();
-});
 ```
+
+## Best Practices
+----------------
+
+Here are some best practices to keep in mind when using Modal-Projects:
+
+*   Use clear and concise titles and content for your modals.
+*   Use accessibility features to ensure that your modals are accessible to all users.
+*   Test your modals thoroughly to ensure that they work as expected.
+*   Use custom templates and styles to customize the appearance and behavior of your modals.
+
+## Troubleshooting
+-----------------
+
+Here are some common issues that you may encounter when using Modal-Projects, along with solutions:
+
+*   **Modal not showing**: Check that you have called the `show()` method on the modal instance.
+*   **Modal not closing**: Check that you have called the `hide()` method on the modal instance.
+*   **Modal not accessible**: Check that you have enabled accessibility features for the modal instance.
 
 ## Conclusion
-----------
+--------------
 
-Modal-Projects is a powerful and flexible library for creating and managing modal windows in web applications. With its intuitive API and robust feature set, Modal-Projects provides a seamless way to integrate modals into your projects. Whether you're building a simple alert modal or a complex custom modal, Modal-Projects has the features and flexibility you need to get the job done.
+Modal-Projects is a powerful and flexible library for creating and managing modal windows in web applications. With its intuitive API and robust feature set, Modal-Projects provides a seamless way to integrate modals into your projects. By following the best practices and troubleshooting guides outlined in this documentation, you can ensure that your modals are effective and accessible to all users.
